@@ -33,11 +33,7 @@ class LoginScreen extends StatelessWidget {
             showToast(msg: state.loginModel!.message!, toastState: true);
           }
         }
-        if (result != null){
-          if(!result!){
-            checkNet(context);
-          }
-        }
+        checkNet(context);
       },
       builder: (context,state){
         var cubit = MazonCubit.get(context);

@@ -6,7 +6,6 @@ import 'package:mazon/shared/components/components.dart';
 import 'package:mazon/shared/styles/colors.dart';
 import '../modules/cart/cart_screen.dart';
 import '../modules/search/search_screen.dart';
-import '../shared/components/constants.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
@@ -17,11 +16,7 @@ class MazonLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<MazonCubit,MazonStates>(
       listener: (context,state){
-        if (result != null){
-          if(!result!){
-            checkNet(context);
-          }
-        }
+        checkNet(context);
       },
       builder: (context,state){
         var cubit = MazonCubit.get(context);

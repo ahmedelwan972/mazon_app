@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=> MazonCubit()..checkInterNet()..getHome(),
+      create: (context)=> MazonCubit()..getHome()..checkInterNet(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
