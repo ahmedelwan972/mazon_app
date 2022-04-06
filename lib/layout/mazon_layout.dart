@@ -14,35 +14,58 @@ class MazonLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MazonCubit,MazonStates>(
-      listener: (context,state){
+    return BlocConsumer<MazonCubit, MazonStates>(
+      listener: (context, state) {
         checkNet(context);
       },
-      builder: (context,state){
+      builder: (context, state) {
         var cubit = MazonCubit.get(context);
         return Scaffold(
           extendBody: true,
           appBar: AppBar(
-            flexibleSpace:linearGradient(),
+            flexibleSpace: linearGradient(),
             actions: [
-              IconButton(
-                  onPressed:(){
-                    if(cubit.homeModel != null){
+              Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      if (cubit.homeModel != null) {
                         cubit.getCarts();
-                      navigateTo(context, CartScreen());
-                    }
-                  },
-                  icon: Icon(Icons.shopping_cart)),
+                        navigateTo(context, CartScreen());
+                      }
+                    },
+                    icon: Icon(Icons.shopping_cart),
+                  ),
+                  if(cubit.cart)
+                  Align(
+                    alignment: AlignmentDirectional.topEnd,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.red,
+                      child: Text(
+                        cubit.cartsModel != null
+                            ? cubit.cartsModel!.data!.cartItems!.length.toString()
+                            : '',
+                        style: TextStyle(color: Colors.white,fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               IconButton(
-                  onPressed:(){
+                  onPressed: () {
                     navigateTo(context, SearchScreen());
                   },
                   icon: Icon(Icons.search)),
             ],
             leading: IconButton(
-              icon: Icon(Icons.notifications,color: Colors.white,),
-              onPressed: (){
-                if(cubit.notificationModel ==null){
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                if (cubit.notificationModel == null) {
                   cubit.getNotifications();
                 }
                 navigateTo(context, NotificationsScreen());
@@ -51,7 +74,7 @@ class MazonLayout extends StatelessWidget {
             backgroundColor: defaultColor,
             centerTitle: true,
             title: Text(
-                cubit.titles[cubit.currentIndex],
+              cubit.titles[cubit.currentIndex],
             ),
           ),
           body: cubit.screen[cubit.currentIndex],
@@ -59,20 +82,32 @@ class MazonLayout extends StatelessWidget {
             color: defaultColor.withOpacity(.9),
             index: cubit.currentIndex,
             backgroundColor: Colors.transparent,
-            onTap: (index){
-              if(index == 2 &&cubit.favoriteModel == null){
+            onTap: (index) {
+              if (index == 2 && cubit.favoriteModel == null) {
                 cubit.getFav();
               }
-              if(index == 3 &&cubit.authModel == null){
+              if (index == 3 && cubit.authModel == null) {
                 cubit.getProfile();
               }
               cubit.changeIndex(index);
             },
             items: [
-              Icon(Icons.home,color: Colors.white,),
-              Icon(Icons.category,color: Colors.white,),
-              Icon(Icons.favorite,color: Colors.white,),
-              Icon(Icons.settings,color: Colors.white,),
+              Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              Icon(
+                Icons.category,
+                color: Colors.white,
+              ),
+              Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ),
+              Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
             ],
           ),
         );

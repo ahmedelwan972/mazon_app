@@ -11,8 +11,8 @@ class CartsModel {
 
 class Data {
   List<CartItems>? cartItems;
-  int? subTotal;
-  int? total;
+  dynamic subTotal;
+  dynamic total;
 
 
   Data.fromJson(Map<String, dynamic> json) {

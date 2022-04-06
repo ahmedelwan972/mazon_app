@@ -130,9 +130,9 @@ class OrderDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(height: 18,width: 200,child: Text('Name : ${products.name}',style: TextStyle(fontSize: 16),)),
-              Text('price :${products.price}   ',style: TextStyle(fontSize: 14),),
-              Text('quantity : ${products.quantity}  ',style: TextStyle(fontSize: 14),),
+              Container(height: 18,width: 200,child: Text('Name : ${products.name}',style: TextStyle(fontSize: 12),)),
+              Text('price :${products.price}   ',style: TextStyle(fontSize: 12),),
+              Text('quantity : ${products.quantity}  ',style: TextStyle(fontSize: 12),),
             ],
           ),
         ],

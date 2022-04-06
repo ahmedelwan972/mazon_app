@@ -84,15 +84,15 @@ class SettingScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Name : ${cubit.authModel!.data!.name!}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style:TextStyle(fontSize: 18),
                         ),
                         Text(
                           'Email : ${cubit.authModel!.data!.email!}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style:TextStyle(fontSize: 18),
                         ),
                         Text(
                           'Phone : ${cubit.authModel!.data!.phone!}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style:TextStyle(fontSize: 18),
                         ),
                       ],
                     ),

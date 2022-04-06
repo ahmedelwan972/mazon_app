@@ -71,7 +71,7 @@ buildCateItem(context,CategoriesListData data){
           Expanded(
             child: Text(
               data.name!,
-              style: Theme.of(context).textTheme.headline6,
+              style: TextStyle(fontSize: 20),
             ),
           ),
           Spacer(),

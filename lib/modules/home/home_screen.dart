@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Category',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(
                         height: 5,
@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Text(
                         'Products',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(
                         height: 10,
@@ -191,7 +191,7 @@ gridViewBuild(context, Products model) {
                   model.name!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.5),
+                  style: TextStyle( fontSize: 12),
                 ),
                 SizedBox(
                   height: 3.5,
@@ -289,7 +289,7 @@ buildCategoryItem(context,CategoriesListData model) {
             },
           ),
           Container(
-            height: 20,
+            height: 24,
             width: 150,
             alignment: AlignmentDirectional.center,
             color: Colors.black.withOpacity(0.5),

@@ -68,10 +68,10 @@ class ProductScreen extends StatelessWidget {
                       alignment: AlignmentDirectional.topCenter,
                       width: double.infinity,
                       padding: EdgeInsetsDirectional.all(18),
-                      height: 350,
+                      height: 470,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: BoxDecoration(
-                        color: Colors.blueGrey.withOpacity(0.8),
+                        color: Colors.blueGrey.withOpacity(0.7),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(60),
                           topRight: Radius.circular(60),
@@ -133,7 +133,10 @@ class ProductScreen extends StatelessWidget {
                           ),
                           Text(
                               cubit.productModel!.data!.description!,
-                              style: Theme.of(context).textTheme.caption!.copyWith(color: Colors.white),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12
+                              ),
                               maxLines: 15,
                               overflow: TextOverflow.ellipsis,
                           ),

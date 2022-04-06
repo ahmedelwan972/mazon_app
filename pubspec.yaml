@@ -109,3 +109,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/Cairo-Regular.ttf
+        - asset: assets/Cairo-SemiBold.ttf

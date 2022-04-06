@@ -10,7 +10,7 @@ import 'package:mazon/shared/network/local/cache_helper.dart';
 import 'package:mazon/shared/network/remote/dio.dart';
 import 'modules/onboarding/onboarding_screen.dart';
 
-void main()async {
+void main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -28,9 +28,9 @@ void main()async {
   } else {
     widget = OnBoardingScreen();
   }
-  runApp( MyApp(startWidget: widget,));
-
-
+  runApp(MyApp(
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -41,26 +41,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=> MazonCubit()..getHome()..checkInterNet(),
+      create: (context) => MazonCubit()
+        ..getHome()
+        ..getCarts()
+        ..checkInterNet(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.teal,
-          appBarTheme: AppBarTheme(
-            actionsIconTheme: IconThemeData(
-              color: Colors.white
-            ),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            centerTitle: true,
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.black
-            )
-          )
-        ),
+            fontFamily: 'Cairo',
+            primarySwatch: Colors.teal,
+            appBarTheme: AppBarTheme(
+                actionsIconTheme: IconThemeData(color: Colors.white),
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                centerTitle: true,
+                elevation: 0,
+                iconTheme: IconThemeData(color: Colors.black))),
         home: startWidget,
       ),
     );
   }
 }
-

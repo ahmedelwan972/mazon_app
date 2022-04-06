@@ -103,7 +103,7 @@ Widget defaultFormField({
 Future<bool?> showToast({required String msg, bool? toastState}) =>
     Fluttertoast.showToast(
         msg: msg,
-        toastLength: Toast.LENGTH_LONG,
+        toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 5,
         backgroundColor: toastState != null
@@ -151,6 +151,7 @@ checkNet(context){
 }
 
 appBar(context,title) {
+  var cubit = MazonCubit.get(context);
   return AppBar(
     leading: IconButton(
       onPressed: (){
@@ -160,12 +161,31 @@ appBar(context,title) {
       ),
     ),
     actions: [
-      IconButton(
-          onPressed:(){
-            MazonCubit.get(context).getCarts();
-            navigateTo(context, CartScreen());
-          },
-          icon: Icon(Icons.shopping_cart)),
+      Stack(
+        alignment: AlignmentDirectional.centerStart,
+        children: [
+          IconButton(
+            onPressed:(){
+              if(cubit.homeModel != null){
+                cubit.getCarts();
+                navigateTo(context, CartScreen());
+              }
+            },
+            icon: Icon(
+                Icons.shopping_cart
+            ),
+          ),
+          if(cubit.cart)
+            Align(
+            alignment: AlignmentDirectional.topStart,
+            child: CircleAvatar(
+              radius: 12,
+              backgroundColor: Colors.red,
+              child: Text(cubit.cartsModel!=null ? cubit.cartsModel!.data!.cartItems!.length.toString():'',style: TextStyle(color: Colors.white,fontSize: 14),),
+            ),
+          ),
+        ],
+      ),
       IconButton(
           onPressed:(){
             navigateTo(context, SearchScreen());
@@ -257,7 +277,6 @@ buildProductItem(context, {data,bool isOld = true,bool isCart = false,index}){
                 Container(
                   child: Text(
                     data!.name!,
-                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                   height: 80,
                   width: 140,
@@ -337,12 +356,14 @@ buildProductItem(context, {data,bool isOld = true,bool isCart = false,index}){
                 children: [
                   IconButton(
                     onPressed: () {
-                      if(cubit.cartsModel!.data!.cartItems![index].quantity! !=1){
+                      if(cubit.cartsModel!.data!.cartItems![index].quantity! !=1) {
                         cubit.addMoreItemInCartOrRemove(
                           cubit.cartsModel!.data!.cartItems![index].id!,
-                          cubit.cartsModel!.data!.cartItems![index].quantity! -1,
+                          cubit.cartsModel!.data!.cartItems![index].quantity! - 1,
                         );
                         cubit.getCarts();
+                      }else{
+                        cubit.changeCart(data!.id!);
                       }
                     },
                     icon: CircleAvatar(
@@ -357,7 +378,7 @@ buildProductItem(context, {data,bool isOld = true,bool isCart = false,index}){
                   ),
                   IconButton(
                     onPressed: () {
-                       cubit.addMoreItemInCartOrRemove(
+                      cubit.addMoreItemInCartOrRemove(
                          cubit.cartsModel!.data!.cartItems![index].id!,
                          cubit.cartsModel!.data!.cartItems![index].quantity! +1,
                        );

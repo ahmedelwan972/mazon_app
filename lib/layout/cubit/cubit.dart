@@ -329,19 +329,26 @@ class MazonCubit extends Cubit<MazonStates> {
     ).then((value) {
       getFav();
     }).catchError((e){
-     favorites[productId] = !favorites[productId]!;
+      favorites[productId] = !favorites[productId]!;
      emit(ChangeFavErrorState());
     });
   }
 
   CartsModel? cartsModel;
+  bool cart = false;
   void getCarts()async{
     emit(GetCartsLoadingState());
     await DioHelper.getData(
         url: cartsGE,
         token: token
     ).then((value) {
-      cartsModel = CartsModel.fromJson(value.data);
+      if(value.data['data']['cart_items'].isNotEmpty){
+        cart = true;
+        cartsModel = CartsModel.fromJson(value.data);
+      }else{
+        cart = false;
+        cartsModel = CartsModel.fromJson(value.data);
+      }
       emit(GetCartsSuccessState());
     }).catchError((e){
       print(e.toString());
@@ -358,6 +365,7 @@ class MazonCubit extends Cubit<MazonStates> {
           'product_id': productId,
         }
     ).then((value) {
+      showToast(msg: value.data['message']);
       getCarts();
     }).catchError((e){
      carts[productId] = !carts[productId]!;

@@ -29,13 +29,30 @@ var searchController = TextEditingController();
               ),
             ),
             actions: [
-              IconButton(
-                onPressed: (){
-                  cubit.getCarts();
-                  navigateTo(context, CartScreen());
-                },
-                icon: Icon(Icons.shopping_cart,color: Colors.white,
-                ),
+              Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: [
+                  IconButton(
+                    onPressed:(){
+                      if(cubit.homeModel != null){
+                        cubit.getCarts();
+                        navigateTo(context, CartScreen());
+                      }
+                    },
+                    icon: Icon(
+                        Icons.shopping_cart
+                    ),
+                  ),
+                  if(cubit.cart)
+                    Align(
+                    alignment: AlignmentDirectional.topStart,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.red,
+                      child: Text(cubit.cartsModel!=null ? cubit.cartsModel!.data!.cartItems!.length.toString():'',style: TextStyle(color: Colors.white,fontSize: 14),),
+                    ),
+                  ),
+                ],
               ),
             ],
             flexibleSpace:linearGradient(),

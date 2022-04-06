@@ -43,9 +43,10 @@ class CartScreen extends StatelessWidget {
         builder: (context,state){
           var cubit = MazonCubit.get(context);
           return ConditionalBuilder(
-            condition: cubit.cartsModel!=null&& state is! GetCartsLoadingState&& state is! GetHomeLoadingState,
+            condition: cubit.cartsModel!=null&& state is! GetHomeLoadingState,
             fallback: (context)=>Center(child: CircularProgressIndicator()),
             builder: (context)=>Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 cubit.cartsModel!.data!.cartItems!.isNotEmpty ?
                 Expanded(
