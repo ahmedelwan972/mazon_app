@@ -278,7 +278,6 @@ class MazonCubit extends Cubit<MazonStates> {
           });
         });
         getCategory();
-        emit(GetHomeSuccessState());
       }).catchError((e){
         print(e.toString());
         emit(GetHomeErrorState());

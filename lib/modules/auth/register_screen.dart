@@ -27,6 +27,7 @@ class RegisterScreen extends StatelessWidget {
               token = state.registerModel!.data!.token;
               MazonCubit.get(context).currentIndex = 0;
               MazonCubit.get(context).getHome();
+              MazonCubit.get(context).getCarts();
               navigateAndFinish(context, MazonLayout());
             }).catchError((e){print(e.toString());});
           }else{
